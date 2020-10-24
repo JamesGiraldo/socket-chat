@@ -17,52 +17,48 @@
     <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
 </head>
 
-<body class="fix-header single-column card-no-border fix-sidebar">
-    <div id="main-wrapper">
-        <div class="page-wrapper">
-            <div class="container-fluid">
-                <div class="row animated fadeIn">
-                    <div class="col-12">
-                        <div class="card m-b-0">
-                            <div class="chat-main-box">
-                                <div class="chat-left-aside">
-                                    <div class="open-panel"><i class="ti-angle-right"></i></div>
-                                    <div class="chat-left-inner">
-                                        <div class="form-material">
-                                            <input class="form-control p-20" type="text" placeholder="Buscar Contacto">
-                                        </div>
-                                        <ul class="chatonline style-none" id="divUsuarios"> </ul>
-                                    </div>
+<body>
+    <div class="container my-1">
+        <div class="row  ">
+            <div class="col-12 contenidoChat">
+                <div class="card m-b-0">
+                    <div class="chat-main-box">
+                        <div class="chat-left-aside">
+                            <div class="open-panel"><i class="ti-angle-right"></i></div>
+                            <div class="chat-left-inner">
+                                <div class="form-material">
+                                    <input class="form-control p-20" type="search" placeholder="Buscar Contacto" id="buscar">
                                 </div>
-                                <div class="chat-right-aside">
-                                    <div class="chat-main-header">
-                                        <div class="p-20 b-b">
-                                            <h3 class="box-title">Sala de chat <small>Video Juegos</small></h3>
+                                <ul class="chatonline style-none" id="divUsuarios"> </ul>
+                            </div>
+                        </div>
+                        <div class="chat-right-aside">
+                            <div class="chat-main-header" id="">
+                                <div class="p-20 b-b">
+                                    <h3 class="box-title">Sala de chat <small>Video Juegos</small></h3>
+                                </div>
+                            </div>
+                            <div class="chat-rbox">
+                                <ul class="chat-list p-20" id="divChatbox"></ul>
+                            </div>
+                            <div class="card-body b-t m-b-20">
+                                <form id="formEnviar">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <input class="form-control b-0 inputarea" id="txtMensaje" autocomplete="off" id="txtMensaje" placeholder="Escribe tu mensaje aquí" class="form-control b-0 inputarea" autofocus cols="30" rows="10"></input>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <button type="submit" class="btn btn-success btn-circle btn-lg"><i class="fa fa-paper-plane-o"></i> </button>
                                         </div>
                                     </div>
-                                    <div class="chat-rbox">
-                                        <ul class="chat-list p-20" id="divChatbox"></ul>
-                                    </div>
-                                    <div class="card-body b-t">
-                                        <form id="formEnviar">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <input autocomplete="off" id="txtMensaje" placeholder="Escribe tu mensaje aquí" class="form-control b-0" autofocus>
-                                                </div>
-                                                <div class="col-4 text-right">
-                                                    <button type="submit" class="btn btn-info btn-circle btn-lg"><i class="fa fa-paper-plane-o"></i> </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <footer class="footer">
-                Super Chat - Fernando Herrera
+                Super Chat - James Giraldo
             </footer>
         </div>
     </div>
@@ -70,6 +66,28 @@
     <script src="socket.io/socket.io.js"></script>
     <script src="js/socket-chat-jquery.js"></script>
     <script src="js/socket-chat.js"></script>
+    <script>
+        // filtros
+        const d = document;
+        var inputBuscar = document.getElementById('buscar');
+
+        function searchFilters(input, selector) {
+            inputBuscar.addEventListener('keyup', function(e) {
+                if (e.target.matches(input)) {
+
+                    if (e.key === 'Escape') {
+                        e.target.value = "";
+                    }
+
+                    inputBuscar.querySelectorAll(selector).forEach(el =>
+                        el.textContent.toLowerCase().includes(e.target.value) ?
+                        el.classList.remove('nombre de la clase que sea display none') :
+                        el.classList.add('nombre de la clase que tenga display none')
+                    );
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
